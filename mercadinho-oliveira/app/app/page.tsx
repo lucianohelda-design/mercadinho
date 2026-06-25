@@ -1,3 +1,0 @@
-'use client'
-import Nav from '@/components/Nav';import { supabase } from '@/lib/supabase';import { useEffect,useState } from 'react'
-export default function Dashboard(){const[total,setTotal]=useState(0);const[baixo,setBaixo]=useState(0);useEffect(()=>{supabase.from('vendas').select('total').then(r=>setTotal((r.data||[]).reduce((a:any,b:any)=>a+Number(b.total),0)));supabase.from('produtos').select('id').lt('estoque','estoque_minimo').then(r=>setBaixo(r.data?.length||0))},[]);return <main className="page"><h1 className="title">Olá 👋</h1><div className="card mt-4"><p>Vendas registradas</p><div className="money">R$ {total.toFixed(2)}</div></div><div className="card mt-4"><p>Produtos com estoque baixo</p><div className="money">{baixo}</div></div><Nav/></main>}

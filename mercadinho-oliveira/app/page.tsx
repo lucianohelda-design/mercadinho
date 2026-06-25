@@ -1,4 +1,0 @@
-'use client'
-import { useState } from 'react'
-import { supabase } from '@/lib/supabase'
-export default function Page(){const[email,setEmail]=useState('');const[password,setPassword]=useState('');const[msg,setMsg]=useState('');async function login(e:any){e.preventDefault();const{error}=await supabase.auth.signInWithPassword({email,password});if(error)setMsg(error.message);else location.href='/app'}return <main className="page"><h1 className="title">Mercadinho Oliveira</h1><p className="mb-6">Seu mercadinho na palma da mão.</p><form onSubmit={login} className="card space-y-3"><input className="input" placeholder="E-mail" value={email} onChange={e=>setEmail(e.target.value)}/><input className="input" type="password" placeholder="Senha" value={password} onChange={e=>setPassword(e.target.value)}/><button className="btn w-full">Entrar</button>{msg&&<p>{msg}</p>}</form></main>}
